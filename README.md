@@ -4,11 +4,11 @@
 
 | Integrante | Rol |
 |---|---|
-| Juan Pablo Coca | Responsable de continuidad y relevo |
-| Evelyn Torrico | Operadora técnica |
-| Carlos Alexander | Analista e investigador |
-| Leandro Gonzáles | Responsable de evidencias y documentación |
-| Juan Gabriel Ortega | Coordinador del incidente |
+| Juan Pablo Coca | Coordinador del incidente |
+| Evelyn Torrico | Responsable de evidencias y documentación en GitHub |
+| Carlos Alexander | Responsable de continuidad y relevo |
+| Leandro Gonzáles | Analista e investigador |
+| Juan Gabriel Ortega | Operador técnico |
 
 ## Plantillas de trabajo
 
