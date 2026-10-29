@@ -20,3 +20,7 @@
 - [Informe técnico INC-03](docs/06-informe-tecnico-inc-03.md)
 - [Anexo aclaratorio del PDF](docs/07-anexo-aclaratorio-inc-03.md)
 - [Informe PDF original con capturas](https://github.com/jpcocas360-ctrl/Simulaci-n-profesional-de-soporte-t-cnico-de-TI-/blob/main/SOP-INC-03%20(1).pdf)
+
+## Herramienta de mejora continua
+
+- [Prompt espejo: consultor de mejora continua de GitHub](prompts/consultor-mejora-continua-github.md)
