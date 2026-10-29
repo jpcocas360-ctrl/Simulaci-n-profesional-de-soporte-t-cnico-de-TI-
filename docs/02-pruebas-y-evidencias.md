@@ -22,18 +22,19 @@ Registrar las evidencias en orden cronológico. Las cifras de consola son las ob
 
 | Cambio | Resultado | Precaución / reversión |
 |---|---|---|
-| Según el informe del equipo, el disco virtual se amplió en Proxmox de 4 GB a 10 GB (+6 GiB). | La consola de la VM detectó un disco de 10 GB. | El crecimiento de capacidad virtual y el de partición/sistema de archivos son operaciones distintas. Conservar la captura de Proxmox y el respaldo/snapshot previo si existe. |
-| Se amplió `/dev/sda3` con `parted` y se redimensionó ext4 con `resize2fs`, según el procedimiento reportado por el equipo. | `/dev/sda3` quedó en 8915 MB y ext4 en 8.5G, con 8.0G disponibles. | No se registró interrupción del servicio ni pérdida de datos. Mantener evidencia de antes y después. |
+| Según el informe del equipo, el disco virtual se amplió en Proxmox de 4 GB a 10 GB (+6 GiB). | La consola de la VM detectó un disco de 10 GB. | El crecimiento del disco virtual y el de la partición/sistema de archivos son operaciones distintas. El registro no consigna si se tomó snapshot antes del cambio. |
+| Se amplió `/dev/sda3` con `parted` y se redimensionó ext4 con `resize2fs`, según el procedimiento reportado por el equipo. | `/dev/sda3` quedó en 8915 MB y ext4 en 8.5G, con 8.0G disponibles. Nginx aparecía iniciado después del cambio. | No se conservó en el informe la línea de comandos exacta de `parted`; no afirmar ausencia de interrupción durante todo el cambio solo con el estado posterior del servicio. |
 
 ## Archivos de evidencia
 
 | Archivo / captura | Qué demuestra |
 |---|---|
-| Figura 1 del PDF | Estado de capacidad previo, según la interfaz de Proxmox. |
-| Figuras 2–3 del PDF | Ampliación del disco virtual en Proxmox a 10 GB. |
-| Figura de `df -hT` | Tamaño y espacio libre de los sistemas de archivos después del cambio. |
-| Figura de `fdisk -l /dev/sda` | Tamaño del disco virtual y de las particiones. |
-| Figura de permisos del directorio web | Propietario y permisos de `/var/lib/nginx/html`. |
+| Figura 1 del PDF | Captura inicial de Proxmox: disco virtual de 4 GB. |
+| Figuras 2–3 del PDF | Ampliación en Proxmox en 6 GiB y disco virtual resultante de 10 GB. |
+| Figura 5 del PDF | `df -hT` luego de crecer el disco virtual, pero antes de extender `/dev/sda3`: `/` aún aparece con 2.6G. No usarla como evidencia del tamaño final. |
+| Figura 6 (captura superior) del PDF | Secuencia de ampliación de la partición y ext4, con `df -h` final mostrando 8.5G y 8.0G libres. |
+| Figuras 6 (captura inferior) y 8 del PDF | Salida final de `fdisk -l /dev/sda`; el PDF repite la etiqueta Figura 6 y luego salta a Figura 8. |
+| Figura 9 del PDF | Propietario y permisos de `/var/lib/nginx/html`. |
 | [Informe PDF completo](https://github.com/jpcocas360-ctrl/Simulaci-n-profesional-de-soporte-t-cnico-de-TI-/blob/main/SOP-INC-03%20(1).pdf) | Capturas y narrativa reunidas por el equipo. |
 
-No adjuntar salidas que expongan contraseñas, tokens, direcciones privadas u otros datos sensibles. Las cifras y conclusiones principales están resumidas en [el informe técnico](06-informe-tecnico-inc-03.md).
+No adjuntar salidas que expongan contraseñas, tokens, direcciones privadas u otros datos sensibles. Las cifras y conclusiones principales están resumidas en [el informe técnico](06-informe-tecnico-inc-03.md). El [anexo de revisión](07-anexo-aclaratorio-inc-03.md) documenta los ajustes necesarios al informe PDF original.

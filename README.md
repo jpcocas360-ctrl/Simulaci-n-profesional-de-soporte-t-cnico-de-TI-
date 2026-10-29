@@ -18,4 +18,5 @@
 - [Uso de IA y ActivityWatch](docs/04-herramientas-complementarias.md)
 - [Lista de verificación de entrega](docs/05-checklist-entrega.md)
 - [Informe técnico INC-03](docs/06-informe-tecnico-inc-03.md)
-- [Informe PDF con capturas](https://github.com/jpcocas360-ctrl/Simulaci-n-profesional-de-soporte-t-cnico-de-TI-/blob/main/SOP-INC-03%20(1).pdf)
+- [Anexo aclaratorio del PDF](docs/07-anexo-aclaratorio-inc-03.md)
+- [Informe PDF original con capturas](https://github.com/jpcocas360-ctrl/Simulaci-n-profesional-de-soporte-t-cnico-de-TI-/blob/main/SOP-INC-03%20(1).pdf)

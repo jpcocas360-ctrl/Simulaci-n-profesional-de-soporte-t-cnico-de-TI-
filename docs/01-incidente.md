@@ -3,10 +3,12 @@
 | **Categoría** | Incidente de infraestructura / almacenamiento |
 | --- | --- |
 | **Prioridad** | Alta |
-| **Estado** | Abierto |
+| **Estado inicial** | Abierto |
 | **Solicitante** | Desarrollador web |
 | **Equipo asignado** | Soporte técnico de TI |
 | **Servicio afectado** | Servidor web interno |
+
+**Estado actual de seguimiento:** Capacidad ampliada; pendiente de validar el guardado con el usuario de desarrollo y confirmar qué significa el requisito de 10 GB (disco virtual total o espacio utilizable en `/`).
 
 # Descripción de la incidencia
 
