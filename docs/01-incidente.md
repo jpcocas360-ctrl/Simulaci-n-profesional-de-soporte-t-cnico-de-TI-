@@ -1,42 +1,29 @@
-# Registro del incidente
+# Ticket INC-03 — Capacidad insuficiente en servidor web
 
-Completar con la información recibida. No registrar contraseñas, tokens ni otros secretos.
+| **Categoría** | Incidente de infraestructura / almacenamiento |
+| --- | --- |
+| **Prioridad** | Alta |
+| **Estado** | Abierto |
+| **Solicitante** | Desarrollador web |
+| **Equipo asignado** | Soporte técnico de TI |
+| **Servicio afectado** | Servidor web interno |
 
-## Datos del ticket
+# Descripción de la incidencia
 
-- Identificador del ticket:
-- Fecha y hora de recepción:
-- Canal de recepción:
-- Servicio o equipo afectado:
-- Usuario o área afectada (si corresponde):
-- Prioridad o impacto indicado:
+Buenos días:
 
-## Descripción
+Solicito asistencia para revisar el servidor web que utilizo para mis tareas de desarrollo. Desde hace un tiempo he estado trabajando con el entorno y ahora estoy teniendo limitaciones para continuar con normalidad.
 
-- Síntomas reportados:
-- Alcance conocido:
-- Mensajes de error exactos:
-- Cambios recientes conocidos:
-- Material consultado en Moodle (ruta o título):
+Al guardar nuevos archivos y realizar algunas operaciones del proyecto, el sistema presenta errores relacionados con la escritura o el almacenamiento. La página web todavía puede responder, pero no puedo asegurar que todas las operaciones que requieren guardar información funcionen correctamente.
 
-## Estado inicial
+Necesito continuar desarrollando y desplegando cambios en el sitio. Para el trabajo previsto, estimo que el entorno requiere al menos 10 GB de almacenamiento. No sé si el problema se debe al espacio disponible, a la configuración del sistema de archivos o a otro factor técnico.
 
-- Fecha y hora de observación:
-- Equipo, sistema y condiciones relevantes:
-- Estado observado antes de intervenir:
-- Evidencia del estado inicial (ruta a archivo):
+Solicito que se revise el servidor, se determine la causa mediante comprobaciones verificables y se restablezca una capacidad de trabajo adecuada, procurando no perder información ni interrumpir innecesariamente el servicio.
 
-## Hipótesis
+Gracias.
 
-| ID | Hipótesis | Evidencia que la apoya | Evidencia que falta | Estado |
-|---|---|---|---|---|
-| H1 | | | | Pendiente |
+# Solicitud de servicio
 
-## Estado del incidente
+Diagnosticar la incidencia de almacenamiento del servidor web, diferenciar el espacio asignado al disco virtual del espacio disponible en el sistema de archivos, establecer la causa con evidencias y proponer o ejecutar una recuperación segura según las autorizaciones disponibles. Documentar las comprobaciones, los cambios y el estado final.
 
-- Estado: Pendiente de investigación
-- Impacto confirmado:
-- Acciones realizadas:
-- Próximo paso:
-- Responsable del próximo paso:
-- Actualizado por / fecha y hora:
+**Observación:** La descripción recoge los síntomas informados por el solicitante y su estimación de capacidad necesaria. La causa técnica no está confirmada y debe determinarse mediante diagnóstico.

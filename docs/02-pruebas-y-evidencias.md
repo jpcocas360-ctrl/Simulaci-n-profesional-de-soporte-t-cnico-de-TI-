@@ -1,21 +1,39 @@
-# Pruebas y evidencias
+# Pruebas y evidencias — INC-03
 
-Registrar cada prueba en orden. Anotar comandos exactamente y quitar datos sensibles antes de guardar capturas o salidas.
+Registrar las evidencias en orden cronológico. Las cifras de consola son las observadas en la VM Alpine; las capturas de Proxmox y el informe visual se encuentran en [SOP-INC-03 (1).pdf](https://github.com/jpcocas360-ctrl/Simulaci-n-profesional-de-soporte-t-cnico-de-TI-/blob/main/SOP-INC-03%20(1).pdf).
 
-| ID | Fecha/hora | Responsable | Hipótesis | Procedimiento o comando | Resultado observado | Conclusión | Evidencia (ruta) |
-|---|---|---|---|---|---|---|---|
-| P1 | | | | | | | |
+## Pruebas realizadas
+
+| ID | Comando / comprobación | Resultado observado | Interpretación |
+|---|---|---|---|
+| P1 | `df -h` antes de ampliar la partición | `/dev/sda3` montado en `/`, tamaño 2.6G, usado 62.8M, disponible 2.4G (3%). `/dev/sda1` montado en `/boot`, 271.1M. | El sistema de archivos raíz no estaba lleno. |
+| P2 | `fdisk -l /dev/sda` antes de ampliar la partición | Disco virtual visible de 10 GB. `/dev/sda3` medía 2771 MB; la partición terminaba en el sector 8388607, aunque el disco llegaba al sector 20971519. | La partición raíz no ocupaba todo el disco virtual; había capacidad sin asignar después de ella. |
+| P3 | `df -i` | `/dev/sda3`: 177408 inodos totales, 2431 usados y 174977 disponibles (1%). | El agotamiento de inodos no explica los síntomas. |
+| P4 | `mount` y `blkid` | `/dev/sda3` está montada como ext4 en `/` con `rw`; UUID y tipo ext4 identificados. | Sistema de archivos raíz identificable y montado para lectura/escritura. |
+| P5 | `fdisk -l /dev/sda` después de ampliar la partición | `/dev/sda3` pasó a 8915 MB y termina en el último sector disponible del disco. | La partición raíz ocupa ahora el espacio disponible del disco virtual. |
+| P6 | `df -hT` después del redimensionamiento | `/dev/sda3`, ext4: 8.5G total, 64.2M usados, 8.0G disponibles, 1%. | El sistema de archivos ext4 reconoció la ampliación. |
+| P7 | `dmesg | tail -n 30` | El kernel informó `resizing filesystem` y `resized filesystem` para `sda3`. | Confirmación del redimensionamiento de ext4 por el kernel. |
+| P8 | `rc-status` | Servicio `nginx` aparece como `started`. | Nginx estaba activo durante la revisión. |
+| P9 | `grep -R "^[[:space:]]*root " /etc/nginx` | La raíz web configurada es `/var/lib/nginx/html`. | Ruta usada para revisar permisos y probar escritura. |
+| P10 | `ls -ld /var/lib/nginx/html` | `drwxr-xr-x`, propietario `root`, grupo `root` (permisos 755). | Root puede escribir; otros usuarios solo tienen lectura y acceso al directorio. |
+| P11 | Crear, listar y borrar `prueba-inc03.tmp` en la raíz web | `touch` y `ls -l` finalizaron sin error; el archivo temporal fue eliminado. La sesión mostraba prompt `#` y el archivo quedó como `root:root`. | Se comprobó escritura con privilegios de root. No demuestra que el usuario de desarrollo pueda desplegar ahí. |
 
 ## Cambios efectuados
 
-| Fecha/hora | Responsable | Cambio y motivo | Resultado | Reversión o respaldo | Evidencia |
-|---|---|---|---|---|---|
-| | | | | | |
+| Cambio | Resultado | Precaución / reversión |
+|---|---|---|
+| Según el informe del equipo, el disco virtual se amplió en Proxmox de 4 GB a 10 GB (+6 GiB). | La consola de la VM detectó un disco de 10 GB. | El crecimiento de capacidad virtual y el de partición/sistema de archivos son operaciones distintas. Conservar la captura de Proxmox y el respaldo/snapshot previo si existe. |
+| Se amplió `/dev/sda3` con `parted` y se redimensionó ext4 con `resize2fs`, según el procedimiento reportado por el equipo. | `/dev/sda3` quedó en 8915 MB y ext4 en 8.5G, con 8.0G disponibles. | No se registró interrupción del servicio ni pérdida de datos. Mantener evidencia de antes y después. |
 
 ## Archivos de evidencia
 
-Guardar capturas y archivos relacionados en `evidencias/`. Usar nombres descriptivos, por ejemplo `AAAA-MM-DD_hhmm_prueba-descripcion.png`.
+| Archivo / captura | Qué demuestra |
+|---|---|
+| Figura 1 del PDF | Estado de capacidad previo, según la interfaz de Proxmox. |
+| Figuras 2–3 del PDF | Ampliación del disco virtual en Proxmox a 10 GB. |
+| Figura de `df -hT` | Tamaño y espacio libre de los sistemas de archivos después del cambio. |
+| Figura de `fdisk -l /dev/sda` | Tamaño del disco virtual y de las particiones. |
+| Figura de permisos del directorio web | Propietario y permisos de `/var/lib/nginx/html`. |
+| [Informe PDF completo](https://github.com/jpcocas360-ctrl/Simulaci-n-profesional-de-soporte-t-cnico-de-TI-/blob/main/SOP-INC-03%20(1).pdf) | Capturas y narrativa reunidas por el equipo. |
 
-| Archivo | Qué demuestra | Fecha/hora | Autor | Datos sensibles revisados |
-|---|---|---|---|---|
-| | | | | Sí / No |
+No adjuntar salidas que expongan contraseñas, tokens, direcciones privadas u otros datos sensibles. Las cifras y conclusiones principales están resumidas en [el informe técnico](06-informe-tecnico-inc-03.md).
